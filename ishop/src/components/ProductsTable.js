@@ -1,8 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ProductRow from './ProductRow';
 
 class ProductsTable extends React.Component {
+
+	static propTypes = {
+		productsData: PropTypes.arrayOf(
+			PropTypes.shape({
+				key: PropTypes.number,
+				id: PropTypes.number,
+				name: PropTypes.string,
+				price: PropTypes.number,
+				url: PropTypes.string,
+			})
+		)
+	}
 
 	render() {
 		return(
@@ -17,8 +30,9 @@ class ProductsTable extends React.Component {
 					</tr>
 				</thead>
 				<tbody>
-					{this.props.productsData.map(v =>
+					{this.props.productsData.map((v, i) =>
 						<ProductRow
+							key = {i}
 							id = {v.id}
 							name = {v.name}
 							price = {v.price}

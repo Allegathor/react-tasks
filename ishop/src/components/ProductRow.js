@@ -1,6 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ProductRow extends React.Component {
+
+	static propTypes = {
+		id: PropTypes.number,
+		name: PropTypes.string,
+		price: PropTypes.number,
+		url: PropTypes.string,
+		qty: PropTypes.number
+	}
+
 	render() {
 		return(
 			<tr>
