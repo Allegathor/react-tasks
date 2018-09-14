@@ -10,11 +10,11 @@ class Card extends React.Component {
 		strings: this.props.strArr
 	}
 
-	handleCheck = (evt) => {
+	handleFlagChange = (evt) => {
 		this.updateList(this.state.filterVal, evt.target.checked);
 	}
 
-	handleChange = (evt) => {
+	handleInputChange = (evt) => {
 		this.updateList(evt.target.value, this.state.sortFlag);
 	}
 
@@ -36,8 +36,8 @@ class Card extends React.Component {
 				<UserControl
 					isSorted = {this.state.isSorted}
 					filterVal = {this.state.filterVal}
-					handleCheck = {this.handleCheck}
-					handleChange = {this.handleChange}
+					onFlagChange = {this.handleFlagChange}
+					onInputChange = {this.handleInputChange}
 				/>
 				<List
 					isSorted = {this.state.isSorted}
