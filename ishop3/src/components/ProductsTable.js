@@ -17,12 +17,16 @@ class ProductsTable extends React.Component {
 		)
 	}
 
-	deleteProduct = (index, name) => {
-		this.props.onDel(index, name)
+	deleteProduct = (index, id, name) => {
+		this.props.onDel(index, id, name);
 	}
 
-	selectRow = (id) => {
-		this.props.onSelect(id)
+	selectRow = (index) => {
+		this.props.onSelect(index);
+	}
+
+	editRow = (index) => {
+		this.props.onEdit(index);
 	}
 
 	render() {
@@ -48,8 +52,14 @@ class ProductsTable extends React.Component {
 							url = {v.url}
 							qty = {v.qty}
 							onDel = {this.deleteProduct}
-							onSelect = {() => this.selectRow}
-							isSelected = {this.props.selectedProduct === v.id ? true : false}
+							onSelect = {this.selectRow}
+							onEdit = {this.editRow}
+
+							isSelected =
+								{
+								(this.props.selectedProductData &&
+								this.props.selectedProductData.id)  === v.id ? true : false
+								}
 						/>
 					)}
 				</tbody>

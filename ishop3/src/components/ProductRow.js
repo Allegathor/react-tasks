@@ -13,12 +13,16 @@ class ProductRow extends React.Component {
 
 	handleRowClick = (evt) => {
 		if(evt.target.tagName === 'TR' || evt.target.tagName === 'TD') {
-			this.props.onSelect(this.props.id);
+			this.props.onSelect(this.props.index);
 		}
 	}
 
+	handleEditClick = () => {
+		this.props.onEdit(this.props.index);
+	}
+
 	handleDelClick = () => {
-		this.props.onDel(this.props.index, this.props.name)
+		this.props.onDel(this.props.index, this.props.id, this.props.name)
 	}
 
 	render() {
@@ -29,7 +33,7 @@ class ProductRow extends React.Component {
 				<td>{this.props.url}</td>
 				<td>{this.props.qty}</td>
 				<td>
-					<button>Edit</button>
+					<button onClick={this.handleEditClick}>Edit</button>
 					<button onClick={this.handleDelClick}>Delete</button>
 				</td>
 			</tr>
