@@ -10,7 +10,7 @@ class Rainbow extends React.Component {
 	render() {
 
 		const colors = this.props.rainbowColors;
-		let children = null;
+		let children = this.props.children;
 
 		for(let i = 0; i < colors.length; i++) {
 			children = <div style={{border: 'dashed 1px ' + colors[i], padding: '8px'}}>
