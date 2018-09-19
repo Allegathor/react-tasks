@@ -11,30 +11,50 @@ class ProductCard extends React.Component{
 	}
 
 	handleSaveClick = () => {
-		this.props.onEdit();
+		this.props.onApply(this.props.editingProductData.id);
 	}
 
 	handleCancelClick = () => {
 		this.props.onCancel();
 	}
 
-	handleNameChange = (evt) => {
-		this.props.onNameEdit(evt.target.value);
+	handleNameCh = (evt) => {
+		this.props.nameChangeCB(evt.target.value);
 	}
 
-	handlePriceChange = (evt) => {
-		this.props.onPriceEdit(evt.target.value);
+	handlePriceCh = (evt) => {
+		this.props.priceChangeCB(evt.target.value);
 	}
 
-	handleURLChange = (evt) => {
-		this.props.onURLEdit(evt.target.value);
+	handleUrlCh = (evt) => {
+		this.props.urlChangeCB(evt.target.value);
 	}
 
-	handleQtyChange = (evt) => {
-		this.props.onQtyEdit(evt.target.value);
+	handleQtyCh = (evt) => {
+		this.props.qtyChangeCB(evt.target.value);
+	}
+
+	handleNameBl = (evt) => {
+		this.props.nameBlurCB(evt.target.value);
+	}
+
+	handlePriceBl = (evt) => {
+		this.props.priceBlurCB(evt.target.value);
+	}
+
+	handleUrlBl = (evt) => {
+		this.props.urlBlurCB(evt.target.value);
+	}
+
+	handleQtyBl = (evt) => {
+		this.props.qtyBlurCB(evt.target.value);
 	}
 
 	render() {
+		const errNameMsg = 'Please, fill the field. Value must be a string'
+		const errPriceMsg = 'Please, fill the field. Value must be a rational number greater than 0'
+		const errUrlMsg = 'Please, fill the field. Value must be a valid URL'
+		const errQtyMsg = 'Please, fill the field. Value must be a positive integer'
 		return (
 			<div>
 				{(this.props.cardMode === 0) &&
@@ -53,25 +73,65 @@ class ProductCard extends React.Component{
 				{(this.props.cardMode === 1) &&
 					<div>
 						<h2>Edit existing Product</h2>
+						<span>ID: {this.props.editingProductData.id}</span>
 						<form>
 							<div>
 								<label>Name</label>
-								<input value={this.props.editingProductData.name} onChange={this.handleNameChange}/>
+								<input
+									value={this.props.editingProductData.name}
+									onChange={this.handleNameCh}
+									onBlur={this.handleNameBl}
+								/>
+
+								{(!this.props.isValidName) &&
+									<span>{errNameMsg}</span>
+								}
+
 							</div>
 							<div>
 								<label>Price</label>
-								<input value={this.props.editingProductData.price} onChange={this.handlePriceChange}/>
+								<input
+									value={this.props.editingProductData.price}
+									onChange={this.handlePriceCh}
+									onBlur={this.handlePriceBl}
+								/>
+
+								{(!this.props.isValidPrice) &&
+									<span>{errPriceMsg}</span>
+								}
+
 							</div>
 							<div>
 								<label>URL</label>
-								<input value={this.props.editingProductData.url} onChange={this.handleURLChange}/>
+								<input
+									value={this.props.editingProductData.url}
+									onChange={this.handleUrlCh}
+									onBlur={this.handleUrlBl}
+								/>
+
+								{(!this.props.isValidUrl) &&
+									<span>{errUrlMsg}</span>
+								}
+
 							</div>
 							<div>
 								<label>Quantity</label>
-								<input value={this.props.editingProductData.qty} onChange={this.handleQtyChange}/>
+								<input
+									value={this.props.editingProductData.qty}
+									onChange={this.handleQtyCh}
+									onBlur={this.handleQtyBl}
+								/>
+
+								{(!this.props.isValidQty) &&
+									<span>{errQtyMsg}</span>
+								}
+
 							</div>
 						</form>
-						<button onClick={this.handleSaveClick}>Save</button>
+						<button
+							onClick={this.handleSaveClick}
+							disabled={!(this.props.isValidName && this.props.isValidPrice && this.props.isValidQty && this.props.isValidUrl)}
+						>Save</button>
 						<button onClick={this.handleCancelClick}>Cancel</button>
 					</div>
 				}
@@ -79,7 +139,59 @@ class ProductCard extends React.Component{
 				{(this.props.cardMode === 2) &&
 					<div>
 						<h2>Add new product</h2>
-						<button>Add</button>
+						<span>ID: {this.props.counterID}</span>
+						<form>
+							<div>
+								<label>Name</label>
+								<input
+									onChange={this.handleNameCh}
+									onBlur={this.handleNameBl}
+								/>
+								{(!this.props.isValidName) &&
+									<span>{errNameMsg}</span>
+								}
+							</div>
+
+							<div>
+								<label>Price</label>
+								<input
+									onChange={this.handlePriceCh}
+									onBlur={this.handlePriceBl}
+								/>
+								{(!this.props.isValidPrice) &&
+									<span>{errPriceMsg}</span>
+								}
+							</div>
+
+							<div>
+								<label>URL</label>
+								<input
+									onChange={this.handleUrlCh}
+									onBlur={this.handleUrlBl}
+								/>
+								{(!this.props.isValidUrl) &&
+									<span>{errUrlMsg}</span>
+								}
+
+							</div>
+
+							<div>
+								<label>Quantity</label>
+								<input
+									onChange={this.handleQtyCh}
+									onBlur={this.handleQtyBl}
+								/>
+								{(!this.props.isValidQty) &&
+									<span>{errQtyMsg}</span>
+								}
+
+							</div>
+
+						</form>
+						<button
+							onClick={this.handleAddClick}
+							disabled={!(this.props.isValidName && this.props.isValidPrice && this.props.isValidQty && this.props.isValidUrl)}
+						>Add</button>
 						<button onClick={this.handleCancelClick}>Cancel</button>
 					</div>
 				}

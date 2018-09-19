@@ -17,16 +17,16 @@ class ProductsTable extends React.Component {
 		)
 	}
 
-	deleteProduct = (index, id, name) => {
-		this.props.onDel(index, id, name);
+	deleteProduct = (id, name) => {
+		this.props.onDel(id, name);
 	}
 
-	selectRow = (index) => {
-		this.props.onSelect(index);
+	selectRow = (id) => {
+		this.props.onSelect(id);
 	}
 
-	editRow = (index) => {
-		this.props.onEdit(index);
+	editRow = (id) => {
+		this.props.onEdit(id);
 	}
 
 	render() {

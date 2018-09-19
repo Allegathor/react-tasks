@@ -13,16 +13,16 @@ class ProductRow extends React.Component {
 
 	handleRowClick = (evt) => {
 		if(evt.target.tagName === 'TR' || evt.target.tagName === 'TD') {
-			this.props.onSelect(this.props.index);
+			this.props.onSelect(this.props.id);
 		}
 	}
 
 	handleEditClick = () => {
-		this.props.onEdit(this.props.index);
+		this.props.onEdit(this.props.id);
 	}
 
 	handleDelClick = () => {
-		this.props.onDel(this.props.index, this.props.id, this.props.name)
+		this.props.onDel(this.props.id, this.props.name)
 	}
 
 	render() {

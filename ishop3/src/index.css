@@ -10,3 +10,21 @@ td {
 .is-selected {
 	background-color: coral;
 }
+
+form > div {
+	width: 820px;
+	display: flex;
+}
+
+form label {
+	width: 50px;
+	margin-right: 20px;
+}
+
+form input {
+	margin-right: 12px;
+}
+
+form span {
+	color: rgb(255, 20, 50);
+}
