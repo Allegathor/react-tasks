@@ -1,0 +1,17 @@
+.MobileClient {
+	display: flex;
+}
+
+.MobileClientData {
+	display: flex;
+	margin-right: 40px;
+}
+
+.MobileClientName {
+	width: 120px;
+	margin-right: 20px;
+}
+
+fieldset {
+	width: 360px;
+}

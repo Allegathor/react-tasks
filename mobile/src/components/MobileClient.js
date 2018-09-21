@@ -10,10 +10,18 @@ class MobileClient extends React.PureComponent {
 
   componentWillReceiveProps = (newProps) => {
     this.setState({clientData: newProps.clientData});
-	};
+	}
+
+	initNameChange = () => {
+		clientEvents.emit('initnamech', this.state.clientData.id);
+	}
+
+	initBalChange = () => {
+		clientEvents.emit('initbalch', this.state.clientData.id);
+	}
 
 	delete = () => {
-		clientEvents.emit('deleteclient', this.state.clientData.id);
+		clientEvents.emit('clientdel', this.state.clientData.id);
 	}
 
   render() {
@@ -21,11 +29,13 @@ class MobileClient extends React.PureComponent {
     //console.log("MobileClient id="+this.state.info.id+" render");
 
     return (
-			<div>
-				<span>{this.state.clientData.name}</span>
-				<span>{this.state.clientData.balance}</span>
-				<button>Изменить ФИО</button>
-				<button>Изменить баланс</button>
+			<div className='MobileClient'>
+				<div className='MobileClientData'>
+					<span className='MobileClientName'>{this.state.clientData.name}</span>
+					<span className='MobileClientPrice'>{this.state.clientData.balance}</span>
+				</div>
+				<button onClick={this.initNameChange}>Изменить ФИО</button>
+				<button onClick={this.initBalChange}>Изменить баланс</button>
 				<button onClick={this.delete}>Удалить</button>
 			</div>
 		)
