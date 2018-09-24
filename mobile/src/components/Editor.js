@@ -38,6 +38,12 @@ class Editor extends React.PureComponent {
 		})
 	}
 
+	toggleAddition = () => {
+		this.setState({
+			mode: 3
+		})
+	}
+
 	changeName = (evt) => {
 		this.setState({
 			name: evt.target.value
@@ -68,10 +74,21 @@ class Editor extends React.PureComponent {
 		})
 	}
 
+	addNew = () => {
+		clientEvents.emit('addnew', this.state.name, this.state.balance);
+		this.setState({
+			mode: 0,
+			name: '',
+			balance: ''
+		})
+	}
+
 	render() {
+		console.log('Editor is rendering...')
 
 		return(
 			<div>
+				<button onClick={this.toggleAddition}>Добавить нового клиента</button>
 				{this.state.mode === 0 &&
 					<div>
 					</div>
@@ -93,7 +110,29 @@ class Editor extends React.PureComponent {
 						<button onClick={this.saveBalance}>Сохранить</button>
 						<button onClick={this.toggleDefault}>Отмена</button>
 					</fieldset>
-			}
+				}
+
+				{this.state.mode === 3 &&
+					<fieldset>
+						<legend>Добавление нового клиента</legend>
+						<div>
+							<label>Имя</label>
+							<input
+								value={this.state.name}
+								onChange={this.changeName}
+							/>
+						</div>
+						<div>
+							<label>Баланс</label>
+							<input
+								value={this.state.balance}
+								onChange={this.changeBal}
+							/>
+						</div>
+						<button onClick={this.addNew}>Добавить</button>
+						<button onClick={this.toggleDefault}>Отмена</button>
+					</fieldset>
+				}
 			</div>
 		)
 	}

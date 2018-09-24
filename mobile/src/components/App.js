@@ -11,6 +11,7 @@ let clientsArr = [
 ];
 
 function App(props) {
+	console.log('App is rendering...');
 	return (
 		<div>
 			<MobileCompany

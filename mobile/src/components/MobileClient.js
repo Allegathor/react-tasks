@@ -26,7 +26,7 @@ class MobileClient extends React.PureComponent {
 
   render() {
 
-    //console.log("MobileClient id="+this.state.info.id+" render");
+    console.log('MobileClient is rendering...');
 
     return (
 			<div className='MobileClient'>

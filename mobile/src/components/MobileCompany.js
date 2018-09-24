@@ -9,13 +9,22 @@ class MobileCompany extends React.PureComponent {
 	state = {
 		name: this.props.name,
 		clients: this.props.clients,
-		filterType: 0
+		filterType: 0,
 	}
 
 	componentWillMount() {
 		clientEvents.addListener('clientdel', this.deleteClientHandler)
 		clientEvents.addListener('savename', this.saveName);
 		clientEvents.addListener('savebal', this.saveBalance);
+		clientEvents.addListener('addnew', this.addClient);
+	}
+
+	addClient = (name, balance) => {
+		const id = Math.floor(Math.random() * 1001);
+		const newClients = [...this.state.clients, {id, name, balance}];
+		this.setState({
+			clients: newClients
+		})
 	}
 
 	saveName = (id, name) => {
@@ -77,7 +86,28 @@ class MobileCompany extends React.PureComponent {
 	}
 
 	render() {
+		console.log('MobileCompany is rendering...');
+
+		let compare = null;
+
+		if(this.state.filterType === 1) {
+			compare = v => (v >= 0);
+		} else if(this.state.filterType === 2) {
+			compare = v => (v < 0);
+		}
+
+		const filtClients = compare ? this.state.clients.filter(v => (compare(v.balance))) : this.state.clients;
+
 		const clientElCode = <div>
+			{filtClients.map(v => (
+				<MobileClient
+					key={v.id}
+					clientData={v}
+				/>
+			))}
+		</div>
+
+		/*const clientElCode = <div>
 			{(this.state.filterType === 0) &&
 				<div>
 					{this.state.clients.map(v => (
@@ -110,7 +140,7 @@ class MobileCompany extends React.PureComponent {
 					))}
 				</div>
 			}
-		</div>;
+		</div>;*/
 
 		return(
 			<div>
