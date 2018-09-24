@@ -86,6 +86,7 @@ class MobileCompany extends React.PureComponent {
 	}
 
 	render() {
+
 		console.log('MobileCompany is rendering...');
 
 		let compare = null;
